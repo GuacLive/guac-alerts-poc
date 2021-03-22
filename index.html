@@ -278,7 +278,7 @@
 		async function onDisplay(data) {
 			return new Promise((resolve, reject) => {
 				var alert = document.getElementById('alert');
-				var msg = data?.event?.message;
+				var msg = data && data.event && data.event.message;
 				console.log(data, animation);
 				if (data && data.event && data.event.type === 'follow') {
 					let src = audioSrc;
