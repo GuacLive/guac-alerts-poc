@@ -20,11 +20,17 @@
 			margin: 0px;
 			background-color: transparent;
 		}
+		body {
+			text-rendering: geometricPrecision;
+			font-size: 14px!important;
+			color: rgba(0,0,0,.9);
+			-webkit-font-smoothing: antialiased;
+    		line-height: 1.5;
+			height: 100%;
+		}
 
 		#alerts {
 			position: fixed;
-			width: 100%;
-			height: 100%;
 			left: 0;
 			right: 0;
 			align-items: center;
@@ -32,6 +38,11 @@
 			display: flex;
 			width: 100%;
 			height: 100%;
+		}
+
+		.overlay #alerts {
+			width: 1920px;
+			height: 1080px;
 		}
 
 		#alert {
@@ -233,6 +244,8 @@
 
 		if (params.get('editor')) {
 			document.getElementById('editor').style.display = 'block';
+		}else{
+			document.documentElement.classList.add('overlay');
 		}
 
 		document.getElementById('title').innerHTML = 'Alerts for ' + channel;
@@ -370,4 +383,4 @@
 	</script>
 </body>
 
-</html>
+</html>>
