@@ -1,0 +1,353 @@
+<!doctype html>
+<html>
+
+<head>
+	<title>guac alerts</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Open+Sans" />
+	<style type="text/css">
+		/* This changes all the animations globally */
+		:root {
+			--animate-duration: 3s;
+			--animate-delay: 3s;
+		}
+
+		body,
+		html {
+			font-family: sans-serif;
+			-ms-text-size-adjust: 100%;
+			-webkit-text-size-adjust: 100%;
+			margin: 0px;
+			background-color: transparent;
+		}
+
+		#alerts {
+			position: fixed;
+			width: 100%;
+			height: 100%;
+			left: 0;
+			right: 0;
+			align-items: center;
+			justify-content: center;
+			display: flex;
+			width: 100%;
+			height: 100%;
+		}
+
+		#alert {
+			display: inline-block;
+			padding: 20px;
+			text-shadow: 0px 0px 1px #000, 0px 0px 2px #000, 0px 0px 3px #000, 0px 0px 4px #000, 0px 0px 5px #000;
+			text-align: center;
+		}
+
+		#alert p {
+			font-size: 64px;
+			color: rgb(255, 255, 255);
+			font-weight: 800;
+		}
+
+		#alert p .name {
+			position: relative
+		}
+	</style>
+</head>
+
+<body>
+	<div id="editor" style="display:none">
+		<h1 id="title">Alerts</h1>
+		<label for="animate">Animation</label>
+		<select id="animate" onchange="animateChange(this)">
+			<option value="bounce">bounce</option>
+			<option value="flash">flash</option>
+			<option value="pulse">pulse</option>
+			<option value="rubberBand">rubberBand</option>
+			<option value="shakeX">shakeX</option>
+			<option value="shakeY">shakeY</option>
+			<option value="headShake">headShake</option>
+			<option value="swing">swing</option>
+			<option value="tada">tada</option>
+			<option value="wobble">wobble</option>
+			<option value="jello">jello</option>
+			<option value="heartBeat">heartBeat</option>
+			<option value="backInDown">backInDown</option>
+			<option value="backInLeft">backInLeft</option>
+			<option value="backInRight">backInRight</option>
+			<option value="backInUp">backInUp</option>
+			<option value="bounceIn">bounceIn</option>
+			<option value="bounceInDown">bounceInDown</option>
+			<option value="bounceInLeft">bounceInLeft</option>
+			<option value="bounceInRight">bounceInRight</option>
+			<option value="bounceInUp">bounceInUp</option>
+			<option value="fadeIn">fadeIn</option>
+			<option value="fadeInDown">fadeInDown</option>
+			<option value="fadeInDownBig">fadeInDownBig</option>
+			<option value="fadeInLeft">fadeInLeft</option>
+			<option value="fadeInLeftBig">fadeInLeftBig</option>
+			<option value="fadeInRight">fadeInRight</option>
+			<option value="fadeInRightBig">fadeInRightBig</option>
+			<option value="fadeInUp">fadeInUp</option>
+			<option value="fadeInUpBig">fadeInUpBig</option>
+			<option value="fadeInTopLeft">fadeInTopLeft</option>
+			<option value="fadeInTopRight">fadeInTopRight</option>
+			<option value="fadeInBottomLeft">fadeInBottomLeft</option>
+			<option value="fadeInBottomRight">fadeInBottomRight</option>
+			<option value="flip">flip</option>
+			<option value="flipInX">flipInX</option>
+			<option value="flipInY">flipInY</option>
+			<option value="lightSpeedInRight">lightSpeedInRight</option>
+			<option value="lightSpeedInLeft">lightSpeedInLeft</option>
+			<option value="rotateIn">rotateIn</option>
+			<option value="rotateInDownLeft">rotateInDownLeft</option>
+			<option value="rotateInDownRight">rotateInDownRight</option>
+			<option value="rotateInUpLeft">rotateInUpLeft</option>
+			<option value="rotateInUpRight">rotateInUpRight</option>
+			<option value="hinge">hinge</option>
+			<option value="jackInTheBox">jackInTheBox</option>
+			<option value="rollIn">rollIn</option>
+			<option value="zoomIn">zoomIn</option>
+			<option value="zoomInDown">zoomInDown</option>
+			<option value="zoomInLeft">zoomInLeft</option>
+			<option value="zoomInRight">zoomInRight</option>
+			<option value="zoomInUp">zoomInUp</option>
+			<option value="slideInDown">slideInDown</option>
+			<option value="slideInLeft">slideInLeft</option>
+			<option value="slideInRight">slideInRight</option>
+			<option value="slideInUp">slideInUp</option>
+		</select>
+		<label for="outAnimate">Out animation</label>
+		<select id="outAnimate" onchange="outAnimateChange(this)">
+			<option value="backOutDown">backOutDown</option>
+			<option value="backOutLeft">backOutLeft</option>
+			<option value="backOutRight">backOutRight</option>
+			<option value="backOutUp">backOutUp</option>
+			<option value="bounceOut">bounceOut</option>
+			<option value="bounceOutDown">bounceOutDown</option>
+			<option value="bounceOutLeft">bounceOutLeft</option>
+			<option value="bounceOutRight">bounceOutRight</option>
+			<option value="bounceOutUp">bounceOutUp</option>
+			<option value="fadeOut">fadeOut</option>
+			<option value="fadeOutDown">fadeOutDown</option>
+			<option value="fadeOutDownBig">fadeOutDownBig</option>
+			<option value="fadeOutLeft">fadeOutLeft</option>
+			<option value="fadeOutLeftBig">fadeOutLeftBig</option>
+			<option value="fadeOutRight">fadeOutRight</option>
+			<option value="fadeOutRightBig">fadeOutRightBig</option>
+			<option value="fadeOutUp">fadeOutUp</option>
+			<option value="fadeOutUpBig">fadeOutUpBig</option>
+			<option value="fadeOutTopLeft">fadeOutTopLeft</option>
+			<option value="fadeOutTopRight">fadeOutTopRight</option>
+			<option value="fadeOutBottomRight">fadeOutBottomRight</option>
+			<option value="fadeOutBottomLeft">fadeOutBottomLeft</option>
+			<option value="flipOutX">flipOutX</option>
+			<option value="flipOutY">flipOutY</option>
+			<option value="lightSpeedOutRight">lightSpeedOutRight</option>
+			<option value="lightSpeedOutLeft">lightSpeedOutLeft</option>
+			<option value="rotateOut">rotateOut</option>
+			<option value="rotateOutDownLeft">rotateOutDownLeft</option>
+			<option value="rotateOutDownRight">rotateOutDownRight</option>
+			<option value="rotateOutUpLeft">rotateOutUpLeft</option>
+			<option value="rotateOutUpRight">rotateOutUpRight</option>
+			<option value="rollOut">rollOut</option>
+			<option value="zoomOut">zoomOut</option>
+			<option value="zoomOutDown">zoomOutDown</option>
+			<option value="zoomOutLeft">zoomOutLeft</option>
+			<option value="zoomOutRight">zoomOutRight</option>
+			<option value="zoomOutUp">zoomOutUp</option>
+			<option value="slideOutDown">slideOutDown</option>
+			<option value="slideOutLeft">slideOutLeft</option>
+			<option value="slideOutRight">slideOutRight</option>
+			<option value="slideOutUp">slideOutUp</option>
+		</select>
+		<label for="font">Text Font</label>
+		<input id="font" name="font" type="text" onChange="fontChange(this)" value='Open Sans' />
+		<label for="color">Text color</label>
+		<input id="color" name="color" type="color" onChange="colorChange(this)" value="#88ff91" />
+		<br>
+		<p id="url"></p>
+	</div>
+	<div id="alerts">
+		<span id="alert" class="animate__animated"></span>
+	</div>
+	<script src="https://cdn.socket.io/3.1.3/socket.io.min.js"
+		integrity="sha384-cPwlPLvBTa3sKAgddT6krw0cJat7egBga3DJepJyrLl4Q9/5WLra3rrnMcyTyOnh" crossorigin="anonymous">
+	</script>
+	<script type="text/javascript">
+		// animations=Array.from(document.querySelectorAll("[data-animation]")).map(el => `<option value="${el.innerText}">${el.innerText}</option>`)
+		const animateCSS = (element, animation, prefix = 'animate__') => {
+			// We create a Promise and return it
+			return new Promise((resolve, reject) => {
+				const animationName = `${prefix}${animation}`;
+				const node = document.querySelector(element);
+
+				node.classList.add(`${prefix}animated`, animationName);
+
+				// When the animation ends, we clean the classes and resolve the Promise
+				function handleAnimationEnd(event) {
+					event.stopPropagation();
+					node.classList.remove(`${prefix}animated`, animationName);
+					resolve('Animation ended');
+				}
+
+				node.addEventListener('animationend', handleAnimationEnd, {
+					once: true
+				});
+			})
+		};
+	</script>
+	<script type="text/javascript">
+		const ANIMATION_DURATION = 2000;
+		var params = new URLSearchParams(window.location.search);
+		var animation = params.get('animate') || document.querySelector('#animate').value;
+		var outAnimation = params.get('outAnimate') || document.querySelector('#outAnimate').value;
+		var font = params.get('font') || document.querySelector('#font').value;
+		var color = params.get('color') || document.querySelector('#color').value;
+		var channel = params.get('channel') || 'datagutt';
+
+
+		function selectItemByValue(elmnt, value) {
+
+			for (var i = 0; i < elmnt.options.length; i++) {
+				if (elmnt.options[i].value === value) {
+					console.log(value, i, elmnt.selectedIndex);
+					elmnt.selectedIndex = i;
+					break;
+				}
+			}
+		}
+
+		window.addEventListener('load', () => {
+			selectItemByValue(document.querySelector('#animate'), animation);
+			selectItemByValue(document.querySelector('#outAnimate'), outAnimation);
+			document.querySelector('#font').value = font;
+			document.querySelector('#color').value = color;
+			updateUrl();
+		})
+
+		if (params.get('editor')) {
+			document.getElementById('editor').style.display = 'block';
+		}
+
+		document.getElementById('title').innerHTML = 'Alerts for ' + channel;
+
+		var socket = io('https://viewer-api.guac.live/channel', {
+			transports: ['websocket']
+		});
+		socket.on('connect', function () {
+			console.log('Successfully connected to the websocket');
+			console.log(socket);
+			socket.emit('join', {
+				name: channel
+			});
+		});
+
+		socket.onclose = function () {
+			console.error('Error connecting to socket: Connection error');
+		}
+
+		var alertQueue = [];
+
+		//Perform Action on event
+		socket.on('event', onEvent);
+
+		function onEvent(data) {
+			addAlert(data);
+		}
+
+
+		async function onDisplay(data) {
+			return new Promise((resolve, reject) => {
+				var alert = document.getElementById('alert');
+				var msg = data?.event?.message;
+				console.log(data, animation);
+				if (data && data.event && data.event.type === 'follow') {
+					let src = 'https://uploads.twitchalerts.com/defaults/new-message.mp3';
+					let audio = new Audio(src);
+					var promise = audio.play();
+					if (promise !== undefined) {
+						promise.then(_ => {
+							// Autoplay started!
+						}).catch(error => {
+							// Autoplay was prevented.
+							// Show a "Play" button so that user can start playback.
+						});
+					}
+
+
+					alert.innerHTML =
+						`<p style='font-family:${font}'>
+							<span class="name" style="color:${color}">
+								${msg.user.name}
+							</span> fulgte deg
+							</p>`;
+				} else {
+					alert.innerHTML = JSON.stringify(msg);
+				}
+				animateCSS('#alert', animation).then(() => {
+					animateCSS('#alert', outAnimation).then(() => {
+						alert.innerHTML = '';
+						alert.className = '';
+						resolve(true);
+					}).catch(() => resolve(false));
+				}).catch(() => resolve(false));
+			})
+		}
+
+		function updateUrl() {
+			document.getElementById('url').innerHTML =
+				`${window.location.protocol + '//' + window.location.host + window.location.pathname}?channel=${encodeURIComponent(channel)}&animate=${encodeURIComponent(animation)}&outAnimate=${encodeURIComponent(outAnimation)}&font=${encodeURIComponent(font)}&color=${encodeURIComponent(color)}`;
+		}
+
+		function animateChange(control) {
+			animation = control.value;
+			updateUrl();
+		}
+
+		function outAnimateChange(control) {
+			outAnimation = control.value;
+			updateUrl();
+		}
+
+		function fontChange(control) {
+			font = control.value;
+			updateUrl();
+		}
+
+		function colorChange(control) {
+			color = control.value;
+			updateUrl();
+		}
+
+		function addAlert(data) {
+			console.log('addAlert', data);
+			if (alertQueue.length !== 0) {
+				setTimeout(() => {
+					alertQueue.push(data);
+				}, ANIMATION_DURATION * alertQueue.length);
+			} else {
+				alertQueue.push(data);
+			}
+
+		}
+
+		var queueLoop = async () => {
+			console.log('queueLoop', alertQueue.length);
+			if (alertQueue.length === 0) {
+				setTimeout(queueLoop, 500);
+				return;
+			}
+			const alertQueueLength = alertQueue.length;
+			for (let i = 0; i < alertQueueLength; i++) {
+				if (alertQueue[i]) await onDisplay(alertQueue[i]);
+				alertQueue.splice(i, 1);
+				console.log()
+				if (i == alertQueueLength - 1 || alertQueueLength === 0) {
+					setTimeout(queueLoop, 500);
+				}
+			}
+		};
+		queueLoop();
+	</script>
+</body>
+
+</html>
