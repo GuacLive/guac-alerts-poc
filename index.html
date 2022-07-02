@@ -217,7 +217,7 @@
 		var color = params.get('color') || document.querySelector('#color').value;
 		var audioSrc = params.get('audioSrc') || 'https://uploads.twitchalerts.com/defaults/new-message.mp3';
 		var volumeControl = params.get('volume') || 0.5;
-		var channel = params.get('channel') || 'datagutt';
+		var channel = params.get('channel');
 
 
 		function selectItemByValue(elmnt, value) {
